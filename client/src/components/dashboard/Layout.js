@@ -49,6 +49,12 @@ class Layout extends Component {
                 />
               <Route component={NotFound} />
             </Switch>
+            <button
+              className="main-btn create-habit"
+              onClick={this.setFalse}
+            >
+              test, set false
+            </button>
           </div>
         </>
       );

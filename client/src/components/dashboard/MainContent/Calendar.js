@@ -42,10 +42,8 @@ class Cal extends Component {
 
   render() {
 		const { days } = this.props.days;
-		let calData = []
-		let dayData = days.sort().map(day => (
-			calData.push(day.eventData)
-		));
+		let calData = [];
+		days.sort().map(day => (calData.push(day.eventData)));
 
     return (
         <Calendar

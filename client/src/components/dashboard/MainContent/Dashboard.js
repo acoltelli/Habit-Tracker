@@ -3,8 +3,6 @@ import "./MainContent.scss";
 import "./Dashboard.scss";
 import { connect } from "react-redux";
 import { getCompletedHabits, completeHabit } from "../../../actions/habitsActions";
-import { createDay, getDays } from "../../../actions/daysActions";
-import axios from 'axios';
 import Cal from "./Calendar";
 import Modal from "./Modal/Modal";
 
@@ -18,12 +16,6 @@ class Dashboard extends Component {
     color:"",
     owner: {}
   };
-
-
-
-componentWillMount() {
-  // console.log(this.props)
-  }
 
 // TODO: Dont need to use componentDidUpdate, include flag in props and write function to
 // update both calendar events & completed habits @ 'complete habit' onClick
@@ -71,20 +63,7 @@ componentDidUpdate() {
 
   render() {
     const { habits } = this.props.habits;
-    const { days } = this.props.days;
-    // console.log(days);
-    // console.log(this.state.calendarEvents);
     let content;
-    let dayData = days.sort().map(d => (
-
-      <div>[{d.eventData.title},
-           {d.eventData.backgroundColor},
-           {d.eventData.allDay.value},
-           {d.eventData.start},
-           {d.eventData.end}]
-      </div>
-    ));
-
     let habitData = habits.sort().map(habit => (
       <div
         key={habit._id}
@@ -169,11 +148,10 @@ componentDidUpdate() {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  habits: state.habits,
-  days: state.days
+  habits: state.habits
 });
 
 export default connect(
   mapStateToProps,
-  { getCompletedHabits, completeHabit, createDay, getDays }
+  { getCompletedHabits, completeHabit }
 )(Dashboard);
