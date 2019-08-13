@@ -80,7 +80,7 @@ router.patch(
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     let habitFields = {};
-    habitFields.name = req.body.editName;
+    habitFields.name = req.body.habitName;
 
     Habit.findOneAndUpdate(
       { _id: req.body.id },

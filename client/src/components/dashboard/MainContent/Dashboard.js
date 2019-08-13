@@ -16,43 +16,21 @@ class Dashboard extends Component {
     name: "",
     id: "",
     color:"",
-    owner: {},
-    calendarEvents: []
+    owner: {}
   };
 
-// TODO: refactor
-getEvents = () => {
-  axios.get('http://localhost:3000/api/days/')
-      .then(response => {
-        let eventsArr = []
-        let events = response.data;
-        for (let i = 0; i < events.length; i++) {
-          eventsArr.push(events[i].eventData)
-        }
-        this.setState({
-          // calendarEvents: [...this.state.calendarEvents, ...eventsArr]
-          calendarEvents: eventsArr
-        })
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-};
 
-componentDidMount() {
-  // this.getEvents();
-  console.log(this.props);
-  // console.log(this.props.days.day);
-  // this.props.getDays();
+
+componentWillMount() {
+  // console.log(this.props)
   }
 
 // TODO: Dont need to use componentDidUpdate, include flag in props and write function to
 // update both calendar events & completed habits @ 'complete habit' onClick
 // On second thought componentDidUpdate might be appropriate here.
-// componentDidUpdate() {
-// 	this.getEvents();
-//   this.props.getCompletedHabits();
-//   }
+componentDidUpdate() {
+  this.props.getCompletedHabits();
+  }
 
   toggleModal = e => {
     this.setState({ modal: !this.state.modal, edit: false });
@@ -94,16 +72,23 @@ componentDidMount() {
   render() {
     const { habits } = this.props.habits;
     const { days } = this.props.days;
+    // console.log(days);
+    // console.log(this.state.calendarEvents);
     let content;
     let dayData = days.sort().map(d => (
-      <div>{d.eventData.title}</div>
 
+      <div>[{d.eventData.title},
+           {d.eventData.backgroundColor},
+           {d.eventData.allDay.value},
+           {d.eventData.start},
+           {d.eventData.end}]
+      </div>
     ));
+
     let habitData = habits.sort().map(habit => (
       <div
         key={habit._id}
         className="habit-icon"
-        // onClick={() => this.props.history.push(`/habits/${habit._id}`)}
       >
         <div className="habit-name">{habit.name}</div>
         <div
@@ -146,10 +131,9 @@ componentDidMount() {
             />
           </div>
           <div className="habits-wrapper">{habitData}</div>
-          <div>{dayData} </div>
+
           <div className="cal-wrapper">
-          <Cal
-              calendarEvents={this.state.calendarEvents}/>
+          <Cal />
           </div>
         </>
       );

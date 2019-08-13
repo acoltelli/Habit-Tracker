@@ -6,8 +6,7 @@ import "./Modal.scss";
 
 class Modal extends Component {
   state = {
-    habitName: "",
-    editName: ""
+    habitName: ""
   };
 
 
@@ -34,7 +33,7 @@ class Modal extends Component {
   updateHabit = async id => {
     let habit = {
       id: this.props.id,
-      editName: this.state.editName
+      habitName: this.state.habitName
     };
     await this.props.updateHabit(habit);
     this.onClose();
@@ -46,15 +45,8 @@ class Modal extends Component {
   };
 
   onClose = e => {
+    this.setState({ habitName: "" });
     this.props.onClose && this.props.onClose(e);
-    this.setState({
-      habittName: "",
-      editName: ""
-    });
-  };
-
-  onSelectChange = e => {
-    this.setState({ [e.target.id]: e.target.value });
   };
 
 
@@ -85,8 +77,8 @@ class Modal extends Component {
               <div className="form-label">New Habit Name</div>
               <input
                 onChange={this.onChange}
-                value={this.state.editName}
-                id="editName"
+                value={this.state.habitName}
+                id="habitName"
                 type="text"
                 className="form-input"
               />
@@ -147,8 +139,7 @@ class Modal extends Component {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  habits: state.habits,
-  days: state.days
+  habits: state.habits
 });
 
 export default connect(

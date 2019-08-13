@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Calendar,  momentLocalizer } from "react-big-calendar";
 import Toolbar from 'react-big-calendar/lib/Toolbar';
 import moment from "moment";
+import { getDays } from "../../../actions/daysActions";
 import "./react-big-calendar.scss";
 import "./MainContent.scss";
 import "./Dashboard.scss";
@@ -25,9 +26,10 @@ class CustomToolbar extends Toolbar {
 }
 
 class Cal extends Component {
-  state = {
-		events: []
+	componentWillMount() {
+    this.props.getDays();
   };
+
 
 	eventStyle= (event) => {
     var style = {
@@ -39,12 +41,18 @@ class Cal extends Component {
 };
 
   render() {
+		const { days } = this.props.days;
+		let calData = []
+		let dayData = days.sort().map(day => (
+			calData.push(day.eventData)
+		));
+
     return (
         <Calendar
           localizer={localizer}
           defaultDate={new Date()}
           components = {{toolbar : CustomToolbar}}
-					events={this.props.calendarEvents}
+					events={calData}
 					eventPropGetter={(this.eventStyle)}
           style={{ height: "90vh"}}
         />
@@ -53,10 +61,11 @@ class Cal extends Component {
 }
 
 const mapStateToProps = state => ({
-	auth: state.auth
+	auth: state.auth,
+	days: state.days
 });
 
 export default connect(
   mapStateToProps,
-  { }
+  { getDays }
 )(Cal);
