@@ -18,25 +18,12 @@ static defaultProps = {
     location:''
   };
 
-// TODO: This function to get the actual data is a work in progress unfortunately.
-// Need helper functions to build out the chartData object
-componentWillMount(){
-    this.getChartData();
-    this.props.getToday();
-    let labelsArr = [];
-    let data = [];
-    let response= this.props.days.days;
-    if (response.length !== []){
-    for (let i = 0; i < response.length; i++) {
-      labelsArr.push(response[i].eventData.title)
-    }
-    // this.helper(labelsArr);
-    // console.log(labelsArr)
-    // console.log(this.state.labels)
-}
+componentDidMount(){
+    // this.props.getToday();
+    // this.getChartData();
 };
 
-// This is some fake data
+
   getChartData(){
      this.setState({
        chartData:{
@@ -44,15 +31,7 @@ componentWillMount(){
          datasets:[
            {
              label:'',
-             data:[
-               1,
-               1,
-               1,
-               1,
-               1,
-               0,
-               1
-             ],
+             data:[1,1,1,1,1,0,1],
              backgroundColor:[
                'rgba(255, 99, 132, 0.6)',
                'rgba(54, 162, 235, 0.6)',
@@ -69,15 +48,30 @@ componentWillMount(){
      });
    }
 
+
+
+
   render(){
-
-
+    const { days } = this.props.days;
+    let chartData = {
+      labels:['Not Complete'],
+      datasets:[ { data:[1,1,1,1,1,1,1], backgroundColor:['LightGrey'] }]
+    };
+    days.sort().map(day => (chartData.labels.push(day.eventData.title)
+    ));
+    days.sort().map(day => (chartData.datasets[0].backgroundColor.push(day.eventData.backgroundColor)
+    ));
+    // let n = chartData.labels.length;
+    // let data = Array(n).fill(1);
+    // chartData.datasets.data = data;
+    // console.log(chartData)
 
     return (
       <div className="main-content">
       <div className="chart-wrapper">
         <Doughnut
-          data={this.state.chartData}
+          // data={this.state.chartData}
+          data = {chartData}
           options={{
             title:{
               display:this.props.displayTitle,

@@ -3,6 +3,7 @@ import "./MainContent.scss";
 import "./Dashboard.scss";
 import { connect } from "react-redux";
 import { getCompletedHabits, completeHabit } from "../../../actions/habitsActions";
+import { createDay, getDays } from "../../../actions/daysActions";
 import Cal from "./Calendar";
 import Modal from "./Modal/Modal";
 
@@ -17,9 +18,6 @@ class Dashboard extends Component {
     owner: {}
   };
 
-// TODO: Dont need to use componentDidUpdate, include flag in props and write function to
-// update both calendar events & completed habits @ 'complete habit' onClick
-// On second thought componentDidUpdate might be appropriate here.
 componentDidUpdate() {
   this.props.getCompletedHabits();
   }
@@ -42,7 +40,6 @@ componentDidUpdate() {
   };
 
   createDay = (id, name, color) => {
-    console.log(id, name);
     let day = {
       id: id,
       name: name,
@@ -153,5 +150,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCompletedHabits, completeHabit }
+  { getCompletedHabits, completeHabit, createDay, getDays }
 )(Dashboard);

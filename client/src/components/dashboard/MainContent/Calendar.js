@@ -26,7 +26,7 @@ class CustomToolbar extends Toolbar {
 }
 
 class Cal extends Component {
-	componentWillMount() {
+	componentDidMount() {
     this.props.getDays();
   };
 

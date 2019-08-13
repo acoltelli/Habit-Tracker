@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCompletedHabits, getHabits, setFalse } from "../../actions/habitsActions";
+import { getCompletedHabits, getHabits } from "../../actions/habitsActions";
 import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
 import Spinner from "../common/Spinner";
 import Chart from "./MainContent/Chart";
@@ -19,15 +19,9 @@ class Layout extends Component {
   };
 
 
-  setFalse = () => {
-    console.log('set false');
-    this.props.setFalse();
-  };
-
   render() {
     const { habits, habitsLoading } = this.props.habits;
     let dashboardContent;
-
     if (habits === null || habitsLoading) {
       dashboardContent = <Spinner />;
     } else if (habits.length > 0) {
@@ -49,12 +43,6 @@ class Layout extends Component {
                 />
               <Route component={NotFound} />
             </Switch>
-            <button
-              className="main-btn create-habit"
-              onClick={this.setFalse}
-            >
-              test, set false
-            </button>
           </div>
         </>
       );
@@ -77,7 +65,6 @@ class Layout extends Component {
               />
               <Route component={NotFound} />
             </Switch>
-
           </div>
         </>
       );
@@ -86,7 +73,8 @@ class Layout extends Component {
     return (
       <Router>
         <div className="wrapper">
-        {dashboardContent}</div>
+        {dashboardContent}
+        </div>
       </Router>
     );
   }
@@ -105,6 +93,6 @@ const mapStateToProps = state => ({
 export default withRouter(
   connect(
     mapStateToProps,
-    { getCompletedHabits, getHabits, setFalse }
+    { getCompletedHabits, getHabits }
   )(Layout)
 );
