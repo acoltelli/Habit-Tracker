@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import { logoutUser } from "../../../actions/authActions";
 import { getHabits } from "../../../actions/habitsActions";
 import "./SideNav.scss";
 
