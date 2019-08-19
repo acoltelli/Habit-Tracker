@@ -15,7 +15,7 @@ import "./Layout.scss";
 
 class Layout extends Component {
   componentWillMount() {
-    this.props.getCompletedHabits();
+    this.props.getHabits();
   };
 
 

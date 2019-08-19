@@ -11,8 +11,6 @@ export const HABIT_LOADING = "HABIT_LOADING";
 export const GET_HABITS = "GET_HABITS";
 export const GET_COMPLETED_HABITS = "GET_COMPLETED_HABITS";
 export const HABITS_LOADING = "HABITS_LOADING";
-export const SET_FALSE = "SET_FALSE";
-
 
 export const CREATE_DAY = "CREATE_DAY";
 export const GET_DAY = "GET_DAY";
@@ -20,6 +18,3 @@ export const GET_TODAY = "GET_TODAY";
 export const GET_DAYS = "GET_DAYS";
 export const DAY_LOADING = "DAY_LOADING";
 export const DAYS_LOADING = "DAYS_LOADING";
-
-// For testing only
-export const GET_EVENTS= "GET_EVENTS";

@@ -22,7 +22,7 @@ router.get(
   passport.authenticate("jwt", {session: false}),
   async (req, res) => {
     var date = new Date();
-    await Day.find({ user: req.user.id, date: [date.getFullYear(), date.getMonth() + 1, date.getDate()]})
+    await Day.find({ user: req.user.id, date: {"$gte": [date.getFullYear(), date.getMonth() + 1, date.getDate()]}})
       .then(days => {
         res.json(days);
       })

@@ -8,8 +8,7 @@ import {
   HABIT_LOADING,
   GET_HABITS,
   GET_COMPLETED_HABITS,
-  HABITS_LOADING,
-  SET_FALSE
+  HABITS_LOADING
 } from "./types";
 
 
@@ -47,19 +46,6 @@ export const completeHabit = habitData => dispatch => {
     .then(res =>
       dispatch({
         type: COMPLETE_HABIT,
-        payload: res.data
-      })
-    )
-    .catch(err => console.log(err));
-};
-
-// Set complete to false
-export const setFalse = habitData => dispatch => {
-  axios
-    .patch("/api/habits/setFalse", habitData)
-    .then(res =>
-      dispatch({
-        type: SET_FALSE,
         payload: res.data
       })
     )

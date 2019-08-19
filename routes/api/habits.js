@@ -95,25 +95,6 @@ router.patch(
 );
 
 
-// Set all habits in table complete to false, for testing
-router.patch(
-  "/setFalse",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    let habitFields = {};
-    habitFields.complete = false;
-
-    Habit.updateMany(
-      { $set: habitFields },
-    )
-      .then(habit => {
-        res.json(habit);
-      })
-      .catch(err => console.log(err));
-  }
-);
-
-
 // Mark habit complete
 router.patch(
   "/complete",

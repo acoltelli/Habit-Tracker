@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "./MainContent.scss";
 import "./Dashboard.scss";
 import { connect } from "react-redux";
-import { getCompletedHabits, completeHabit } from "../../../actions/habitsActions";
+import { getHabits, completeHabit } from "../../../actions/habitsActions";
 import { createDay, getDays } from "../../../actions/daysActions";
 import Cal from "./Calendar";
 import Modal from "./Modal/Modal";
@@ -18,8 +18,9 @@ class Dashboard extends Component {
     owner: {}
   };
 
+// shouldComponentUpdate allows us to say: only update if the props you care about change
 componentDidUpdate() {
-  this.props.getCompletedHabits();
+  this.props.getHabits();
   }
 
   toggleModal = e => {
@@ -150,5 +151,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getCompletedHabits, completeHabit, createDay, getDays }
+  { getHabits, completeHabit, createDay, getDays }
 )(Dashboard);

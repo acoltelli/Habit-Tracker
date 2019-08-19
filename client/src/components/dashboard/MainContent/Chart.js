@@ -2,13 +2,15 @@ import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { Doughnut } from 'react-chartjs-2';
 import { getToday } from "../../../actions/daysActions";
+import { getHabits } from "../../../actions/habitsActions";
 import "./MainContent.scss";
 import "./Dashboard.scss";
 
 
 class Chart extends Component{
     state = {
-      chartData:{}
+      chartData: {},
+      numHabits: 0
   };
 
 static defaultProps = {
@@ -18,9 +20,11 @@ static defaultProps = {
     location:''
   };
 
-componentDidMount(){
-    // this.props.getToday();
-    // this.getChartData();
+componentWillMount(){
+  this.props.getToday();
+  this.setState({
+    numHabits: this.props.habits.habits.length
+  })
 };
 
 
@@ -53,18 +57,15 @@ componentDidMount(){
 
   render(){
     const { days } = this.props.days;
+    const { habits } = this.props.habits;
+    let d = new Array(habits.length).fill(1);
     let chartData = {
-      labels:['Not Complete'],
-      datasets:[ { data:[1,1,1,1,1,1,1], backgroundColor:['LightGrey'] }]
+      labels:[],
+      datasets:[ { data: d, backgroundColor:[] }]
     };
-    days.sort().map(day => (chartData.labels.push(day.eventData.title)
-    ));
-    days.sort().map(day => (chartData.datasets[0].backgroundColor.push(day.eventData.backgroundColor)
-    ));
-    // let n = chartData.labels.length;
-    // let data = Array(n).fill(1);
-    // chartData.datasets.data = data;
-    // console.log(chartData)
+    habits.sort().map(habit => (chartData.labels.push(habit.name)));
+    habits.sort().map(habit => (chartData.datasets[0].backgroundColor.push(habit.color)));
+
 
     return (
       <div className="main-content">
@@ -92,10 +93,11 @@ componentDidMount(){
 
 const mapStateToProps = state => ({
   auth: state.auth,
+  habits: state.habits,
   days: state.days
 });
 
 export default connect(
   mapStateToProps,
-  { getToday }
+  { getToday, getHabits }
 )(Chart);

@@ -6,8 +6,7 @@ import {
   HABIT_LOADING,
   GET_HABITS,
   GET_COMPLETED_HABITS,
-  HABITS_LOADING,
-  SET_FALSE
+  HABITS_LOADING
 } from "../actions/types";
 
 const initialState = {
@@ -46,24 +45,18 @@ export default function(state = initialState, action) {
         habit: action.payload,
         habitLoading: false
       };
-      case SET_FALSE:
-        return {
-          ...state,
-          habit: action.payload,
-          habitLoading: false
-        };
     case GET_COMPLETED_HABITS:
       return {
         ...state,
         habits: action.payload,
         habitsLoading: false
       };
-    // case GET_HABITS:
-    //   return {
-    //     ...state,
-    //     habits: action.payload,
-    //     habitsLoading: false
-    //   };
+    case GET_HABITS:
+      return {
+        ...state,
+        habits: action.payload,
+        habitsLoading: false
+      };
     case HABIT_LOADING:
       return {
         ...state,
