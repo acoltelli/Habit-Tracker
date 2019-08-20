@@ -8,10 +8,6 @@ import "./Dashboard.scss";
 
 
 class Chart extends Component{
-    state = {
-      chartData: {},
-      numHabits: 0
-  };
 
 static defaultProps = {
     displayTitle:true,
@@ -22,37 +18,7 @@ static defaultProps = {
 
 componentWillMount(){
   this.props.getToday();
-  this.setState({
-    numHabits: this.props.habits.habits.length
-  })
 };
-
-
-  getChartData(){
-     this.setState({
-       chartData:{
-         labels: ['Habit1', 'Habit2', 'Habit3', 'Habit4', 'Habit5', 'Habit6', 'Not Complete'],
-         datasets:[
-           {
-             label:'',
-             data:[1,1,1,1,1,0,1],
-             backgroundColor:[
-               'rgba(255, 99, 132, 0.6)',
-               'rgba(54, 162, 235, 0.6)',
-               'rgba(255, 206, 86, 0.6)',
-               'rgba(75, 192, 192, 0.6)',
-               'rgba(153, 102, 255, 0.6)',
-               'rgba(255, 159, 64, 0.6)',
-               // 'rgba(255, 99, 132, 0.6)',
-               'LightGrey'
-             ]
-           }
-         ]
-       }
-     });
-   }
-
-
 
 
   render(){
@@ -64,19 +30,25 @@ componentWillMount(){
       datasets:[ { data: d, backgroundColor:[] }]
     };
     habits.sort().map(habit => (chartData.labels.push(habit.name)));
-    habits.sort().map(habit => (chartData.datasets[0].backgroundColor.push(habit.color)));
+    for (var i = 0; i < habits.length; i++){
+      if (habits[i].complete === false) {
+        chartData.datasets[0].backgroundColor.push('LightGrey');
+      }
+      else {
+        chartData.datasets[0].backgroundColor.push(habits[i].color);
+      }
+    };
 
 
     return (
       <div className="main-content">
       <div className="chart-wrapper">
         <Doughnut
-          // data={this.state.chartData}
           data = {chartData}
           options={{
             title:{
               display:this.props.displayTitle,
-              text: 'Completed Today',
+              text: 'Today',
               fontSize:25
             },
             legend:{

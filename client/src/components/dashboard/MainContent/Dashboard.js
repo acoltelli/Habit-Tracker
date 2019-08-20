@@ -32,7 +32,7 @@ componentWillReceiveProps() {
 
 markComplete = e => {
     for (var i = 0; i < e.habits.length; i++){
-      if (e.habits[i].complete == true && !this.state.completed.includes(e.habits[i]._id)) {
+      if (e.habits[i].complete === true && !this.state.completed.includes(e.habits[i]._id)) {
         this.setState({completed: [...this.state.completed, e.habits[i]._id]})
       }
     }
