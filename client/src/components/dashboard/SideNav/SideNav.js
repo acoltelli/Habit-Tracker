@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import { NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
-import { logoutUser } from "../../../actions/authActions";
-import { getHabits } from "../../../actions/habitsActions";
 import "./SideNav.scss";
 
 
@@ -57,7 +55,6 @@ class SideNav extends Component {
 }
 
 const mapStateToProps = state => ({
-  habits: state.habits
 });
 
 export default withRouter(

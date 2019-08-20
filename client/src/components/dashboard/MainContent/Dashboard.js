@@ -15,12 +15,27 @@ class Dashboard extends Component {
     name: "",
     id: "",
     color:"",
-    owner: {}
+    owner: {},
+    completed: []
   };
+
 
 // shouldComponentUpdate allows us to say: only update if the props you care about change
 componentDidUpdate() {
   this.props.getHabits();
+  }
+
+componentWillReceiveProps() {
+  const e = this.props.habits;
+  this.markComplete(e);
+}
+
+markComplete = e => {
+    for (var i = 0; i < e.habits.length; i++){
+      if (e.habits[i].complete == true && !this.state.completed.includes(e.habits[i]._id)) {
+        this.setState({completed: [...this.state.completed, e.habits[i]._id]})
+      }
+    }
   }
 
   toggleModal = e => {
@@ -55,6 +70,7 @@ componentDidUpdate() {
       id: id,
       habitComplete: this.state.habitComplete
     };
+    this.setState({completed:[...this.state.completed, id]})
     await this.props.completeHabit(habit);
   };
 
@@ -66,6 +82,7 @@ componentDidUpdate() {
       <div
         key={habit._id}
         className="habit-icon"
+        style = {this.state.completed.includes(habit._id) ? {backgroundColor: habit.color} : null }
       >
         <div className="habit-name">{habit.name}</div>
         <div
@@ -108,7 +125,6 @@ componentDidUpdate() {
             />
           </div>
           <div className="habits-wrapper">{habitData}</div>
-
           <div className="cal-wrapper">
           <Cal />
           </div>
