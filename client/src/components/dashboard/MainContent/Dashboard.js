@@ -85,6 +85,8 @@ markComplete = e => {
         style = {this.state.completed.includes(habit._id) ? {backgroundColor: habit.color} : null }
       >
         <div className="habit-name">{habit.name}</div>
+        { !this.state.completed.includes(habit._id) ?
+          <div>
         <div
           className="habit-info-button"
           onClick={this.createDay.bind(this, habit._id, habit.name, habit.color)}
@@ -103,6 +105,8 @@ markComplete = e => {
         >
           Edit habit
         </div>
+        </div>
+        :  null }
       </div>
     ));
 
