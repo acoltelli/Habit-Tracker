@@ -66,7 +66,8 @@ router.post(
 
     const NEW_HABIT = await new Habit({
       owner: OWNER,
-      name: req.body.habitName
+      name: req.body.habitName,
+      color: req.body.color
     });
 
     NEW_HABIT.save().then(habit => res.json(habit));
@@ -81,6 +82,7 @@ router.patch(
   (req, res) => {
     let habitFields = {};
     habitFields.name = req.body.habitName;
+    habitFields.color = req.body.color;
 
     Habit.findOneAndUpdate(
       { _id: req.body.id },

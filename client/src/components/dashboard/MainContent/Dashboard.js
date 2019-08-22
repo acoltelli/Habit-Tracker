@@ -18,8 +18,9 @@ class Dashboard extends Component {
     owner: {}
   };
 
-
-
+  componentWillReceiveProps() {
+    this.props.getHabits();
+ };
 
   toggleModal = e => {
     this.setState({ modal: !this.state.modal, edit: false });
@@ -53,7 +54,6 @@ class Dashboard extends Component {
       id: id,
       habitComplete: this.state.habitComplete
     };
-    this.setState({completed:[...this.state.completed, id]})
     await this.props.completeHabit(habit);
   };
 

@@ -1,14 +1,11 @@
 import React, {Component} from 'react';
 import { connect } from "react-redux";
 import { Doughnut } from 'react-chartjs-2';
-import { getToday } from "../../../actions/daysActions";
-import { getHabits } from "../../../actions/habitsActions";
 import "./MainContent.scss";
 import "./Dashboard.scss";
 
 
 class Chart extends Component{
-
 static defaultProps = {
     displayTitle:true,
     displayLegend: true,
@@ -16,13 +13,7 @@ static defaultProps = {
     location:''
   };
 
-componentWillMount(){
-  this.props.getToday();
-};
-
-
   render(){
-    const { days } = this.props.days;
     const { habits } = this.props.habits;
     let d = new Array(habits.length).fill(1);
     let chartData = {
@@ -38,7 +29,6 @@ componentWillMount(){
         chartData.datasets[0].backgroundColor.push(habits[i].color);
       }
     };
-
 
     return (
       <div className="main-content">
@@ -65,11 +55,10 @@ componentWillMount(){
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  habits: state.habits,
-  days: state.days
+  habits: state.habits
 });
 
 export default connect(
   mapStateToProps,
-  { getToday, getHabits }
+  { }
 )(Chart);

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import { getCompletedHabits, getHabits } from "../../actions/habitsActions";
+import { getHabits } from "../../actions/habitsActions";
 import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
 import Spinner from "../common/Spinner";
 import Chart from "./MainContent/Chart";
@@ -86,13 +86,12 @@ Layout.propTypes = {
 
 const mapStateToProps = state => ({
   auth: state.auth,
-  habits: state.habits,
-  days: state.days
+  habits: state.habits
 });
 
 export default withRouter(
   connect(
     mapStateToProps,
-    { getCompletedHabits, getHabits }
+    { getHabits }
   )(Layout)
 );

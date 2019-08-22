@@ -1,12 +1,14 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createHabit, updateHabit, deleteHabit } from "../../../../actions/habitsActions";
+import { SliderPicker } from 'react-color';
 import "./Modal.scss";
 
 
 class Modal extends Component {
   state = {
-    habitName: ""
+    habitName: "",
+    color: ""
   };
 
 
@@ -14,6 +16,7 @@ class Modal extends Component {
     if (nextProps.edit) {
       this.setState({
         habitName: nextProps.name,
+        color: nextProps.color
       });
     }
   }
@@ -25,6 +28,7 @@ class Modal extends Component {
   createHabit = () => {
     let habit = {
       habitName: this.state.habitName,
+      color: this.state.color
     };
     this.props.createHabit(habit);
     this.onClose();
@@ -33,7 +37,8 @@ class Modal extends Component {
   updateHabit = async id => {
     let habit = {
       id: this.props.id,
-      habitName: this.state.habitName
+      habitName: this.state.habitName,
+      color: this.state.color
     };
     await this.props.updateHabit(habit);
     this.onClose();
@@ -44,9 +49,17 @@ class Modal extends Component {
     this.onClose();
   };
 
+  handleChangeColor = (color) => {
+    this.setState({ color: color.hex });
+  };
+
   onClose = e => {
-    this.setState({ habitName: "" });
+    this.setState({
+      habitName: "",
+      color: ""
+   });
     this.props.onClose && this.props.onClose(e);
+    console.log(this.state.color)
   };
 
 
@@ -84,6 +97,10 @@ class Modal extends Component {
               />
             </label>
           </div>
+         <SliderPicker
+         color={ this.state.color }
+         onChangeComplete={ this.handleChangeColor }
+         />
           <div>
             <button
               className="main-btn update-habit"
@@ -124,6 +141,10 @@ class Modal extends Component {
               />
             </label>
           </div>
+          <SliderPicker
+          color={ this.state.color }
+          onChangeComplete={ this.handleChangeColor }
+          />
           <div>
             <button
               className="main-btn create-habit"
