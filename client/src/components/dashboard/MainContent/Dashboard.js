@@ -15,28 +15,11 @@ class Dashboard extends Component {
     name: "",
     id: "",
     color:"",
-    owner: {},
-    completed: []
+    owner: {}
   };
 
 
-// shouldComponentUpdate allows us to say: only update if the props you care about change
-componentDidUpdate() {
-  this.props.getHabits();
-  }
 
-componentWillReceiveProps() {
-  const e = this.props.habits;
-  this.markComplete(e);
-}
-
-markComplete = e => {
-    for (var i = 0; i < e.habits.length; i++){
-      if (e.habits[i].complete === true && !this.state.completed.includes(e.habits[i]._id)) {
-        this.setState({completed: [...this.state.completed, e.habits[i]._id]})
-      }
-    }
-  }
 
   toggleModal = e => {
     this.setState({ modal: !this.state.modal, edit: false });
@@ -82,10 +65,10 @@ markComplete = e => {
       <div
         key={habit._id}
         className="habit-icon"
-        style = {this.state.completed.includes(habit._id) ? {backgroundColor: habit.color} : null }
+        style = {habit.complete ? {backgroundColor: habit.color} : null }
       >
         <div className="habit-name">{habit.name}</div>
-        { !this.state.completed.includes(habit._id) ?
+        { !habit.complete ?
           <div>
         <div
           className="habit-info-button"
@@ -106,7 +89,20 @@ markComplete = e => {
           Edit habit
         </div>
         </div>
-        :  null }
+        :
+        <div
+          className="habit-info-button"
+          onClick={this.toggleEditModal.bind(
+            this,
+            habit.name,
+            habit._id,
+            habit.color,
+            habit.owner
+          )}
+        >
+          Edit habit
+        </div>
+       }
       </div>
     ));
 
