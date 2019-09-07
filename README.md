@@ -1,12 +1,12 @@
 # Habit-Tracker
 ## Stack
-This project is built using the MERN stack. The MERN stack for this project includes the following technologies:
--Node.js backend.
--Express framework for Node.js. 
--Mongoose library for ORM (Object-Relational Mapper).
--MongoDB database.
--React frontend.
--Redux for state management. 
+This project is built using the MERN stack. The MERN stack for this project includes the following technologies:  
+-Node.js backend.  
+-Express framework for Node.js.   
+-Mongoose library for ORM (Object-Relational Mapper).  
+-MongoDB database.  
+-React frontend.  
+-Redux for state management.   
 
 ## Build Instructions
 Create .env file in project, copy/paste the following and set values for the two variables.
