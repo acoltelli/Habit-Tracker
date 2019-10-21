@@ -3,6 +3,6 @@ require('dotenv').config()
 
 
 module.exports = {
-  mongoURI: process.env.DB_URI,
-  secretOrKey: process.env.SECRET
+  mongoURI: 'mongodb+srv://acoltelli:pookie101917@cluster0-j7znk.mongodb.net/test?retryWrites=true&w=majority',
+  secretOrKey: 'secret007'
 };
