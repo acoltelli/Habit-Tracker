@@ -81,7 +81,7 @@ class TopNav extends Component {
             {this.state.dropdown ? (
               <ul className="dropdown">
                 <p>Hello, {name !== undefined && name.split(" ")[0]}</p>
-                <Link to="/dashboard">
+                <Link to="/">
                   <li>Home</li>
                 </Link>
                 <li onClick={this.onLogoutClick}>Sign Out</li>

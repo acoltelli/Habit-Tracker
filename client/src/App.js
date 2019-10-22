@@ -31,7 +31,7 @@ if (localStorage.jwtTokenTeams) {
     store.dispatch(logoutUser());
 
     // Redirect to login
-    window.location.href = "./";
+    window.location.href = "./login";
   }
 }
 
@@ -42,9 +42,9 @@ class App extends Component {
         <Router>
           <div className="App">
             <Switch>
-              <Route exact path="/" component={Login} />
+              <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
-              <PrivateRoute exact path="/dashboard" component={Layout} />
+              <PrivateRoute exact path="/" component={Layout} />
               <Route component={localStorage.jwtTokenTeams ? Layout : NotFound}/>
             </Switch>
           </div>

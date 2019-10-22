@@ -33,7 +33,7 @@ class Layout extends Component {
             <Switch>
               <Route
                 exact
-                path="/dashboard"
+                path="/"
                 component={Dashboard}
               />
               <Route
@@ -55,7 +55,7 @@ class Layout extends Component {
             <Switch>
               <Route
                 exact
-                path="/dashboard"
+                path="/"
                 component={Dashboard}
               />
               <Route

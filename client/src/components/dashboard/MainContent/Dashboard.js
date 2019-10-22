@@ -15,11 +15,16 @@ class Dashboard extends Component {
     name: "",
     id: "",
     color:"",
-    owner: {}
+    owner: {},
+    completeToggle: false
   };
 
-  componentWillReceiveProps() {
-    this.props.getHabits();
+  // componentWillReceiveProps() {
+    // this.props.getHabits();
+ // };
+ componentDidMount (){
+   this.props.getHabits();
+
  };
 
   toggleModal = e => {
@@ -39,13 +44,14 @@ class Dashboard extends Component {
 
   };
 
-  createDay = (id, name, color) => {
+  markComplete = (id, name, color) => {
     let day = {
       id: id,
       name: name,
       color: color
     };
     this.props.createDay(day);
+    this.setState({completeToggle: !this.state.completeToggle})
     this.completeHabit(id);
   };
 
@@ -55,6 +61,7 @@ class Dashboard extends Component {
       habitComplete: this.state.habitComplete
     };
     await this.props.completeHabit(habit);
+    // this.setState({completeToggle: !this.state.completeToggle})
   };
 
 
@@ -72,7 +79,7 @@ class Dashboard extends Component {
           <div>
         <div
           className="habit-info-button"
-          onClick={this.createDay.bind(this, habit._id, habit.name, habit.color)}
+          onClick={this.markComplete.bind(this, habit._id, habit.name, habit.color)}
         >
           Mark Complete
         </div>
