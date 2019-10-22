@@ -22,7 +22,6 @@ router.get(
   }
 );
 
-
 // Get completed habits, by user
 router.get(
   "/completedHabits",
@@ -41,7 +40,6 @@ router.get(
   }
 );
 
-
 // Get all habits by id
 router.get(
   "/:id",
@@ -51,7 +49,6 @@ router.get(
     Habit.findById(id).then(habit => res.json(habit));
   }
 );
-
 
 // Create new habit
 router.post(
@@ -74,8 +71,7 @@ router.post(
   }
 );
 
-
-// Edit habit name
+// Edit habit
 router.patch(
   "/update",
   passport.authenticate("jwt", { session: false }),
@@ -96,7 +92,6 @@ router.patch(
   }
 );
 
-
 // Mark habit complete
 router.patch(
   "/complete",
@@ -116,7 +111,6 @@ router.patch(
       .catch(err => console.log(err));
   }
 );
-
 
 // Delete habit by id
 router.delete(

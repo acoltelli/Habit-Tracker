@@ -7,7 +7,6 @@ import { getDays } from "../../../actions/daysActions";
 import "./react-big-calendar.scss";
 import "./MainContent.scss";
 import "./Dashboard.scss";
-
 const localizer = momentLocalizer(moment);
 
 class CustomToolbar extends Toolbar {
@@ -30,7 +29,6 @@ class Cal extends Component {
     this.props.getDays();
   };
 
-
 	eventStyle= (event) => {
     var style = {
         backgroundColor: event.backgroundColor
@@ -52,7 +50,7 @@ class Cal extends Component {
           components = {{toolbar : CustomToolbar}}
 					events={calData}
 					eventPropGetter={(this.eventStyle)}
-          style={{ height: "90vh"}}
+          style={{ height: "75vh"}}
         />
     );
   }

@@ -15,16 +15,11 @@ class Dashboard extends Component {
     name: "",
     id: "",
     color:"",
-    owner: {},
-    completeToggle: false
+    owner: {}
   };
 
-  // componentWillReceiveProps() {
-    // this.props.getHabits();
- // };
- componentDidMount (){
+componentDidUpdate() {
    this.props.getHabits();
-
  };
 
   toggleModal = e => {
@@ -51,17 +46,15 @@ class Dashboard extends Component {
       color: color
     };
     this.props.createDay(day);
-    this.setState({completeToggle: !this.state.completeToggle})
     this.completeHabit(id);
   };
 
-  completeHabit = async id => {
+  completeHabit = id => {
     let habit = {
       id: id,
       habitComplete: this.state.habitComplete
     };
-    await this.props.completeHabit(habit);
-    // this.setState({completeToggle: !this.state.completeToggle})
+    this.props.completeHabit(habit);
   };
 
 
@@ -69,44 +62,23 @@ class Dashboard extends Component {
     const { habits } = this.props.habits;
     let content;
     let habitData = habits.sort().map(habit => (
-      <div
-        key={habit._id}
-        className="habit-icon"
-        style = {habit.complete ? {backgroundColor: habit.color} : null }
-      >
+      <div key={habit._id} className="habit-icon" style = {habit.complete ? {backgroundColor: habit.color} : null }>
         <div className="habit-name">{habit.name}</div>
         { !habit.complete ?
-          <div>
+        <div>
         <div
           className="habit-info-button"
-          onClick={this.markComplete.bind(this, habit._id, habit.name, habit.color)}
-        >
+          onClick={this.markComplete.bind(this, habit._id, habit.name, habit.color)}>
           Mark Complete
         </div>
-        <div
-          className="habit-info-button"
-          onClick={this.toggleEditModal.bind(
-            this,
-            habit.name,
-            habit._id,
-            habit.color,
-            habit.owner
-          )}
-        >
+        <div className="habit-info-button"
+          onClick={this.toggleEditModal.bind(this,habit.name,habit._id,habit.color,habit.owner)}>
           Edit habit
         </div>
         </div>
         :
-        <div
-          className="habit-info-button"
-          onClick={this.toggleEditModal.bind(
-            this,
-            habit.name,
-            habit._id,
-            habit.color,
-            habit.owner
-          )}
-        >
+        <div className="habit-info-button"
+          onClick={this.toggleEditModal.bind(this, habit.name, habit._id,habit.color,habit.owner)}>
           Edit habit
         </div>
        }
