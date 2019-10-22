@@ -77,11 +77,8 @@ class Modal extends Component {
           <div className="form-group">
             <label>
               <div className="form-label">Habit Name</div>
-
               <input id="habitName" type="text" className="form-input"
                 onChange={e => this.setState({ habitName: e.target.value })} value={this.state.habitName}/>
-
-
             </label>
           </div>
          <div className="form-label">Color</div>

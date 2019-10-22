@@ -8,7 +8,6 @@ import { CREATE_DAY,
        } from "./types";
 
 
-
 // For current day, mark habit complete
 export const createDay = dayData => dispatch => {
   axios
@@ -21,7 +20,6 @@ export const createDay = dayData => dispatch => {
     )
     .catch(err => console.log(err));
 };
-
 
 // Get day by id
 export const getDay = id => dispatch => {
@@ -42,7 +40,6 @@ export const getDay = id => dispatch => {
     );
 };
 
-
 // Get all days for specific user
 export const getDays = () => dispatch => {
   dispatch(setDaysLoading());
@@ -62,7 +59,6 @@ export const getDays = () => dispatch => {
     );
 };
 
-
 export const getToday = () => dispatch => {
   // dispatch(setDaysLoading());
   axios
@@ -80,7 +76,6 @@ export const getToday = () => dispatch => {
       })
     );
 };
-
 
 // Cal data loading
 export const setDayLoading = () => {

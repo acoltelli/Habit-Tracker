@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 var date = new Date();
-const DaySchema = new Schema({
+const CalendarSchema = new Schema({
   eventData: {
       type: Object,
       required: true
@@ -18,4 +18,4 @@ const DaySchema = new Schema({
     }
   });
 
-module.exports = Day = mongoose.model("days", DaySchema);
+module.exports = Calendar = mongoose.model("calendar", CalendarSchema);

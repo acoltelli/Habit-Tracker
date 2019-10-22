@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const passport = require("passport");
-const Day = require("../../models/Day");
+const Calendar = require("../../models/Calendar");
 
 
 // get Day by user
@@ -9,7 +9,7 @@ router.get(
   "/",
   passport.authenticate("jwt", {session: false}),
   async (req, res) => {
-    await Day.find({ user: req.user.id })
+    await Calendar.find({ user: req.user.id })
       .then(days => {
         res.json(days);
       })
@@ -22,7 +22,7 @@ router.get(
   passport.authenticate("jwt", {session: false}),
   async (req, res) => {
     var date = new Date();
-    await Day.find({ user: req.user.id, date: {"$gte": [date.getFullYear(), date.getMonth() + 1, date.getDate()]}})
+    await Calendar.find({ user: req.user.id, date: {"$gte": [date.getFullYear(), date.getMonth() + 1, date.getDate()]}})
       .then(days => {
         res.json(days);
       })
@@ -38,7 +38,7 @@ router.get(
   }),
   (req, res) => {
     let id = req.params.id;
-    Day.findById(id).then(day => res.json(day));
+    Calendar.findById(id).then(day => res.json(day));
   }
 );
 
@@ -59,7 +59,7 @@ router.post(
       end: [date.getFullYear(), date.getMonth() + 1, date.getDate()]
     };
 
-    const NEW_DAYENTRY = await new Day({
+    const NEW_DAYENTRY = await new Calendar({
       eventData: HABIT,
       user: req.user.id
     });
