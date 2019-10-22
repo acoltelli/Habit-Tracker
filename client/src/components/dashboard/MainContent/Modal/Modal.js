@@ -11,7 +11,6 @@ class Modal extends Component {
     color: ""
   };
 
-
   componentWillReceiveProps(nextProps) {
     if (nextProps.edit) {
       this.setState({
@@ -21,9 +20,7 @@ class Modal extends Component {
     }
   }
 
-  onChange = e => {
-      this.setState({ [e.target.id]: e.target.value });
-  };
+  onChange = e => { this.setState({ habitName: e.target.value })};
 
   createHabit = () => {
     let habit = {
@@ -59,14 +56,11 @@ class Modal extends Component {
       color: ""
    });
     this.props.onClose && this.props.onClose(e);
-    console.log(this.state.color)
   };
 
 
   render() {
-    if (!this.props.modal) {
-      return null;
-    }
+    if (!this.props.modal) { return null; }
 
     document.onkeyup = e => {
       if (e.keyCode === 27 && this.props.modal) {
@@ -74,82 +68,52 @@ class Modal extends Component {
       }
     };
 
-    // Edit habit modal
+    // Edit habit
     if (this.props.edit) {
       return (
         <div className="modal">
-          <span className="close-modal" onClick={this.onClose}>
-            &times;
-          </span>
+          <span className="close-modal" onClick={this.onClose}>&times;</span>
           <h1 className="header">Edit {this.props.name}</h1>
-          <p className="created-by">
-            Created by {this.props.owner.name} ({this.props.owner.email})
-          </p>
           <div className="form-group">
             <label>
-              <div className="form-label">New Habit Name</div>
-              <input
-                onChange={this.onChange}
-                value={this.state.habitName}
-                id="habitName"
-                type="text"
-                className="form-input"
-              />
+              <div className="form-label">Habit Name</div>
+
+              <input id="habitName" type="text" className="form-input"
+                onChange={e => this.setState({ habitName: e.target.value })} value={this.state.habitName}/>
+
+
             </label>
           </div>
-         <SliderPicker
-         color={ this.state.color }
-         onChangeComplete={ this.handleChangeColor }
-         />
+         <div className="form-label">Color</div>
+         <SliderPicker color={ this.state.color } onChangeComplete={ this.handleChangeColor }/>
           <div>
-            <button
-              className="main-btn update-habit"
-              onClick={this.updateHabit.bind(this, this.props.id)}
-            >
+            <button className="main-btn update-habit" onClick={this.updateHabit.bind(this, this.props.id)}>
               Update Habit
             </button>
-            {this.props.owner.id === this.props.auth.user.id ? (
-              <button
-                className="main-btn delete-habit"
-                onClick={this.deleteHabit.bind(this, this.props.id)}
-              >
-                Delete Habit
-              </button>
-            ) : null}
+            <button className="main-btn delete-habit" onClick={this.deleteHabit.bind(this, this.props.id)}>
+              Delete Habit
+            </button>
           </div>
         </div>
       );
     }
 
-    // New habit modal
+    // New habit
     else
       return (
         <div className="modal">
-          <span className="close-modal" onClick={this.onClose}>
-            &times;
-          </span>
+          <span className="close-modal" onClick={this.onClose}>&times;</span>
           <h1 className="header">Create New Habit</h1>
           <div className="form-group">
             <label>
-              <input
-                onChange={this.onChange}
-                value={this.state.habitName}
-                id="habitName"
-                type="text"
-                placeholder="New habit"
-                className="form-input"
-              />
+              <input id="habitName" type="text" placeholder="Habit Name" className="form-input"
+                onChange={this.onChange} value={this.state.habitName}/>
             </label>
           </div>
-          <SliderPicker
-          color={ this.state.color }
-          onChangeComplete={ this.handleChangeColor }
-          />
+          <div className="form-label">Color</div>
+          <SliderPicker color={ this.state.color } onChangeComplete={ this.handleChangeColor }/>
           <div>
-            <button
-              className="main-btn create-habit"
-              onClick={this.createHabit}
-            >
+            <button className="main-btn create-habit" onClick={this.createHabit}>
               Create Habit
             </button>
           </div>

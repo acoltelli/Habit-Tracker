@@ -12,7 +12,6 @@ import NotFound from "../404/404";
 import "./Layout.scss";
 
 
-
 class Layout extends Component {
   componentWillMount() {
     this.props.getHabits();

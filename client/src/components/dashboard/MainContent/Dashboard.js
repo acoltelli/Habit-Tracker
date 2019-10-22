@@ -14,49 +14,36 @@ class Dashboard extends Component {
     edit: false,
     name: "",
     id: "",
-    color:"",
-    owner: {}
+    color:""
   };
 
-componentDidUpdate() {
-   this.props.getHabits();
- };
+toggleModal = e => { this.setState({ modal: !this.state.modal, edit: false }) };
 
-  toggleModal = e => {
-    this.setState({ modal: !this.state.modal, edit: false });
+toggleEditModal = (name, id, color, e) => {
+  e.stopPropagation();
+  this.setState({
+    modal: !this.state.modal,
+    edit: true,
+    name: name,
+    id: id,
+    color: color
+  });
+};
+
+markComplete = (id, name, color) => {
+  let day = {
+    id: id,
+    name: name,
+    color: color
   };
+  this.props.createDay(day);
+  this.completeHabit(id);
+};
 
-  toggleEditModal = (name, id, color, owner, e) => {
-    e.stopPropagation();
-    this.setState({
-      modal: !this.state.modal,
-      edit: true,
-      name: name,
-      id: id,
-      color: color,
-      owner: owner
-    });
-
-  };
-
-  markComplete = (id, name, color) => {
-    let day = {
-      id: id,
-      name: name,
-      color: color
-    };
-    this.props.createDay(day);
-    this.completeHabit(id);
-  };
-
-  completeHabit = id => {
-    let habit = {
-      id: id,
-      habitComplete: this.state.habitComplete
-    };
-    this.props.completeHabit(habit);
-  };
-
+completeHabit = id => {
+  let habit = {id: id};
+  this.props.completeHabit(habit);
+};
 
   render() {
     const { habits } = this.props.habits;
@@ -66,19 +53,15 @@ componentDidUpdate() {
         <div className="habit-name">{habit.name}</div>
         { !habit.complete ?
         <div>
-        <div
-          className="habit-info-button"
-          onClick={this.markComplete.bind(this, habit._id, habit.name, habit.color)}>
+        <div className="habit-info-button" onClick={this.markComplete.bind(this, habit._id, habit.name, habit.color)}>
           Mark Complete
         </div>
-        <div className="habit-info-button"
-          onClick={this.toggleEditModal.bind(this,habit.name,habit._id,habit.color,habit.owner)}>
+        <div className="habit-info-button" onClick={this.toggleEditModal.bind(this,habit.name,habit._id,habit.color)}>
           Edit habit
         </div>
         </div>
         :
-        <div className="habit-info-button"
-          onClick={this.toggleEditModal.bind(this, habit.name, habit._id,habit.color,habit.owner)}>
+        <div className="habit-info-button" onClick={this.toggleEditModal.bind(this, habit.name, habit._id,habit.color)}>
           Edit habit
         </div>
        }
@@ -100,12 +83,11 @@ componentDidUpdate() {
               name={this.state.name}
               id={this.state.id}
               color={this.state.color}
-              owner={this.state.owner}
             />
           </div>
           <div className="habits-wrapper">{habitData}</div>
           <div className="cal-wrapper">
-          <Cal />
+            <Cal />
           </div>
         </>
       );
@@ -117,7 +99,7 @@ componentDidUpdate() {
         <>
           <div className="habits">
             <div className="no-habits">
-              <h1 className="header">You dont have any habits yet</h1>
+              <h1 className="header">You don't have any habits yet</h1>
               <button className="main-btn" onClick={this.toggleModal}>
                 Create your first habit
               </button>
