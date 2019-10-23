@@ -4,13 +4,7 @@ import { connect } from "react-redux";
 import "./SideNav.scss";
 
 
-
 class SideNav extends Component {
-  onLogoutClick = e => {
-    this.props.logoutUser();
-  };
-
-
   toggleMenu = e => {
     let sideNav = document.querySelector(".side");
     sideNav.classList.add("invisibile");
@@ -30,10 +24,7 @@ class SideNav extends Component {
       <nav className="side">
         <ul className="top">
           <li>
-            <i
-              onClick={this.toggleMenu}
-              className="material-icons hamburger-side-menu"
-            >
+            <i onClick={this.toggleMenu} className="material-icons hamburger-side-menu">
               menu
             </i>
           </li>
@@ -44,11 +35,10 @@ class SideNav extends Component {
           </NavLink>
           <NavLink exact activeClassName="active-page" to="/data">
             <li>
-              <i className="material-icons icon">check_circle</i>Data
+              <i className="material-icons icon">check_circle</i>Calendar
             </li>
           </NavLink>
         </ul>
-
       </nav>
     );
   }

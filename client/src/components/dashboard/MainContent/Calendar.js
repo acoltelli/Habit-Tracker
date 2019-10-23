@@ -44,6 +44,7 @@ class Cal extends Component {
 		days.sort().map(day => (calData.push(day.eventData)));
 
     return (
+			<div className="cal-wrapper">
         <Calendar
           localizer={localizer}
           defaultDate={new Date()}
@@ -52,6 +53,7 @@ class Cal extends Component {
 					eventPropGetter={(this.eventStyle)}
           style={{ height: "75vh"}}
         />
+			</div>
     );
   }
 }

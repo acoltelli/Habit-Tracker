@@ -5,6 +5,7 @@ import { getHabits } from "../../actions/habitsActions";
 import { BrowserRouter as Router, Route, Switch, withRouter } from "react-router-dom";
 import Spinner from "../common/Spinner";
 import Chart from "./MainContent/Chart";
+import Calendar from "./MainContent/Calendar";
 import SideNav from "./SideNav/SideNav";
 import TopNav from "./TopNav/TopNav";
 import Dashboard from "./MainContent/Dashboard";
@@ -38,7 +39,7 @@ class Layout extends Component {
               <Route
                 exact
                 path="/data"
-                component={Chart}
+                component={Calendar}
                 />
               <Route component={NotFound} />
             </Switch>

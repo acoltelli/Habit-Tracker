@@ -31,7 +31,6 @@ static defaultProps = {
     };
 
     return (
-      <div className="main-content">
       <div className="chart-wrapper">
         <Doughnut
           data = {chartData}
@@ -48,7 +47,6 @@ static defaultProps = {
           }}
         />
         </div>
-      </div>
     )
   }
 }

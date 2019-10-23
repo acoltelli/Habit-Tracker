@@ -55,10 +55,7 @@ class TopNav extends Component {
     return (
       <nav className="top-nav" ref={node => (this.node = node)}>
         <div className="left-top">
-          <i
-            onClick={this.toggleMenu}
-            className="material-icons hamburger-top-menu"
-          >
+          <i onClick={this.toggleMenu} className="material-icons hamburger-top-menu">
             menu
           </i>
 

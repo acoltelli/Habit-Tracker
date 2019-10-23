@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import "./MainContent.scss";
 import "./Dashboard.scss";
 import { connect } from "react-redux";
-import { getHabits, completeHabit } from "../../../actions/habitsActions";
+import { completeHabit } from "../../../actions/habitsActions";
 import { createDay, getDays } from "../../../actions/daysActions";
-import Cal from "./Calendar";
+import Chart from "./Chart";
 import Modal from "./Modal/Modal";
 
 
@@ -86,9 +86,7 @@ completeHabit = id => {
             />
           </div>
           <div className="habits-wrapper">{habitData}</div>
-          <div className="cal-wrapper">
-            <Cal />
-          </div>
+            <Chart />
         </>
       );
     }
@@ -128,5 +126,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { getHabits, completeHabit, createDay, getDays }
+  { completeHabit, createDay, getDays }
 )(Dashboard);
