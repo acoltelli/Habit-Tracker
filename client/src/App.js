@@ -9,6 +9,7 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Layout from "./components/dashboard/Layout";
+import Calendar from "./components/dashboard/MainContent/Calendar";
 import NotFound from "./components/404/404";
 import "./App.scss";
 
@@ -45,6 +46,7 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <PrivateRoute exact path="/" component={Layout} />
+              <PrivateRoute exact path="/calendar" component={Layout} />
               <Route component={localStorage.jwtTokenTeams ? Layout : NotFound}/>
             </Switch>
           </div>
