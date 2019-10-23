@@ -33,7 +33,7 @@ class SideNav extends Component {
               <i className="material-icons icon">home</i>Home
             </li>
           </NavLink>
-          <NavLink exact activeClassName="active-page" to="/data">
+          <NavLink exact activeClassName="active-page" to="/calendar">
             <li>
               <i className="material-icons icon">check_circle</i>Calendar
             </li>
