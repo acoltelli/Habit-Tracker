@@ -48,7 +48,7 @@ completeHabit = id => {
   render() {
     const { habits } = this.props.habits;
     let content;
-    let habitData = habits.sort().map(habit => (
+    let habitData = habits.map(habit => (
       <div key={habit._id} className="habit-icon" style = {habit.complete ? {backgroundColor: habit.color} : null }>
         <div className="habit-name">{habit.name}</div>
         { !habit.complete ?

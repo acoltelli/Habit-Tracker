@@ -46,7 +46,6 @@ class App extends Component {
               <Route exact path="/login" component={Login} />
               <Route exact path="/register" component={Register} />
               <PrivateRoute exact path="/" component={Layout} />
-              <PrivateRoute exact path="/calendar" component={Layout} />
               <Route component={localStorage.jwtTokenTeams ? Layout : NotFound}/>
             </Switch>
           </div>

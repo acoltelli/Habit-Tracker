@@ -15,20 +15,34 @@ static defaultProps = {
 
   render(){
     const { habits } = this.props.habits;
-    let d = new Array(habits.length).fill(1);
-    let chartData = {
-      labels:[],
-      datasets:[ { data: d, backgroundColor:[] }]
-    };
-    habits.sort().map(habit => (chartData.labels.push(habit.name)));
+    let notComplete = 0;
     for (var i = 0; i < habits.length; i++){
       if (habits[i].complete === false) {
-        chartData.datasets[0].backgroundColor.push('LightGrey');
+        notComplete++
       }
-      else {
+    }
+
+    let d = new Array(habits.length - notComplete).fill(1);
+    d.unshift(notComplete);
+
+    let chartData = {
+      labels:['Not yet complete'],
+      datasets:[ { data: d, backgroundColor:['LightGrey'] }]
+    };
+
+    for (var j = 0; j < habits.length; j++){
+      if (habits[j].complete === true) {
+        chartData.labels.push(habits[j].name);
+      }
+    }
+
+    for (var i = 0; i < habits.length; i++){
+      if (habits[i].complete === true) {
         chartData.datasets[0].backgroundColor.push(habits[i].color);
       }
     };
+
+    console.log(chartData);
 
     return (
       <div className="chart-wrapper">
@@ -38,7 +52,7 @@ static defaultProps = {
             title:{
               display:this.props.displayTitle,
               text: 'Today',
-              fontSize:25
+              fontSize:20
             },
             legend:{
               display:this.props.displayLegend,
