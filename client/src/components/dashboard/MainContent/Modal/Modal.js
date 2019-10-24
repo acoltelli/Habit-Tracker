@@ -20,7 +20,7 @@ class Modal extends Component {
     }
   }
 
-  onChange = e => { this.setState({ habitName: e.target.value })};
+  onChange = e => { this.setState({ [e.target.id]: e.target.value })};
 
   createHabit = () => {
     let habit = {

@@ -12,7 +12,6 @@ import {
 } from "./types";
 
 
-
 // Create Habit
 export const createHabit = habitData => dispatch => {
   axios
