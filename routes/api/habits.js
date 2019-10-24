@@ -2,7 +2,23 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const Habit = require("../../models/Habit");
+const Validator = require("validator");
+const isEmpty = require("is-empty");
 
+
+function validateHabitInput(data) {
+  let errors = {};
+  // Convert empty fields to an empty string so we can use validator functions
+  data.habitName = !isEmpty(data.habitName) ? data.habitName : "";
+  data.color = !isEmpty(data.color) ? data.color : "";
+  if (Validator.isEmpty(data.habitName) || data.habitName === "") {
+    errors.habitName = "Habit name field is required";
+  }
+  return {
+    errors,
+    isValid: isEmpty(errors)
+  };
+};
 
 // Get habits by user
 router.get(
@@ -55,18 +71,23 @@ router.post(
   "/create",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
+    const { errors, isValid } = validateHabitInput(req.body);
+
+    if (req.body.habitName === null) {
+      console.log("feswesd")
+      return res.status(404).json({ emailnotfound: "Email not found" });
+    }
+
     const OWNER = {
       id: req.user.id,
       name: req.user.name,
       email: req.user.email
     };
-
     const NEW_HABIT = await new Habit({
       owner: OWNER,
       name: req.body.habitName,
       color: req.body.color
     });
-
     NEW_HABIT.save().then(habit => res.json(habit));
   }
 );

@@ -2,13 +2,15 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createHabit, updateHabit, deleteHabit } from "../../../../actions/habitsActions";
 import { SliderPicker } from 'react-color';
+import PropTypes from "prop-types";
 import "./Modal.scss";
 
 
 class Modal extends Component {
   state = {
     habitName: "",
-    color: ""
+    color: "",
+    errors: {}
   };
 
   componentWillReceiveProps(nextProps) {
@@ -18,9 +20,14 @@ class Modal extends Component {
         color: nextProps.color
       });
     }
+    if (nextProps.errors) {
+      this.setState({
+        errors: nextProps.errors
+      });
+    }
   }
 
-  onChange = e => { this.setState({ habitName: e.target.value })};
+  onChange = e => { this.setState({ [e.target.id]: e.target.value })};
 
   createHabit = () => {
     let habit = {
@@ -28,7 +35,8 @@ class Modal extends Component {
       color: this.state.color
     };
     this.props.createHabit(habit);
-    this.onClose();
+    console.log("create")
+
   };
 
   updateHabit = async id => {
@@ -61,6 +69,7 @@ class Modal extends Component {
 
   render() {
     if (!this.props.modal) { return null; }
+    const { errors } = this.state;
 
     document.onkeyup = e => {
       if (e.keyCode === 27 && this.props.modal) {
@@ -103,8 +112,14 @@ class Modal extends Component {
           <h1 className="header">Create New Habit</h1>
           <div className="form-group">
             <label>
-              <input id="habitName" type="text" placeholder="Habit Name" className="form-input"
-                onChange={this.onChange} value={this.state.habitName}/>
+
+              <input required id="habitName" type="text" placeholder="Habit Name" className="form-input"
+                onChange={this.onChange} value={this.state.habitName} error={errors.habitName}/>
+                <div className="auth-error">
+                  {errors.habitName}
+                  {errors.color}
+                </div>
+
             </label>
           </div>
           <div className="form-label">Color</div>
@@ -119,9 +134,14 @@ class Modal extends Component {
   }
 }
 
+Modal.propTypes = {
+  errors: PropTypes.object.isRequired
+};
+
 const mapStateToProps = state => ({
   auth: state.auth,
-  habits: state.habits
+  habits: state.habits,
+  errors: state.errors
 });
 
 export default connect(
