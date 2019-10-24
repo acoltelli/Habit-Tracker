@@ -3,9 +3,9 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const path = require('path');
-const users = require("./routes/users");
-const habits = require("./routes/habits");
-const days = require("./routes/days");
+const users = require("./routes/api/users");
+const habits = require("./routes/api/habits");
+const days = require("./routes/api/days");
 const app = express();
 
 // Bodyparser middleware
@@ -35,9 +35,9 @@ app.use(passport.initialize());
 require("./config/passport")(passport);
 
 // Routes
-app.use("/users", users);
-app.use("/habits", habits);
-app.use("/days", days);
+app.use("/api/users", users);
+app.use("/api/habits", habits);
+app.use("/api/days", days);
 
 // Serve static assets if in production
 if (process.env.NODE_ENV === 'production') {

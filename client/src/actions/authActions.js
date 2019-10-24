@@ -9,7 +9,7 @@ import { GET_ERRORS,
 // Register User
 export const registerUser = (userData, history) => dispatch => {
   axios
-    .post("/users/register", userData)
+    .post("/api/users/register", userData)
     .then(res => history.push("/"))
     .catch(err =>
       dispatch({
@@ -22,7 +22,7 @@ export const registerUser = (userData, history) => dispatch => {
 // Login - get user token
 export const loginUser = userData => dispatch => {
   axios
-    .post("/users/login", userData)
+    .post("/api/users/login", userData)
     .then(res => {
       // Save to localStorage
 
