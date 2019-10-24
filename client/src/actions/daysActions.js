@@ -11,7 +11,7 @@ import { CREATE_DAY,
 // For current day, mark habit complete
 export const createDay = dayData => dispatch => {
   axios
-    .post("/api/days/createDay", dayData)
+    .post("/days/createDay", dayData)
     .then(res =>
       dispatch({
         type: CREATE_DAY,
@@ -25,7 +25,7 @@ export const createDay = dayData => dispatch => {
 export const getDay = id => dispatch => {
   dispatch(setDayLoading());
   axios
-    .get(`/api/days/${id}`)
+    .get(`/days/${id}`)
     .then(res =>
       dispatch({
         type: GET_DAY,
@@ -44,7 +44,7 @@ export const getDay = id => dispatch => {
 export const getDays = () => dispatch => {
   dispatch(setDaysLoading());
   axios
-    .get("/api/days")
+    .get("/days")
     .then(res =>
       dispatch({
         type: GET_DAYS,
@@ -62,7 +62,7 @@ export const getDays = () => dispatch => {
 export const getToday = () => dispatch => {
   // dispatch(setDaysLoading());
   axios
-    .get("/api/days/todaysCompleted")
+    .get("/days/todaysCompleted")
     .then(res =>
       dispatch({
         type: GET_TODAY,

@@ -16,7 +16,7 @@ import {
 // Create Habit
 export const createHabit = habitData => dispatch => {
   axios
-    .post("/api/habits/create", habitData)
+    .post("/habits/create", habitData)
     .then(res =>
       dispatch({
         type: CREATE_HABIT,
@@ -29,7 +29,7 @@ export const createHabit = habitData => dispatch => {
 // Update Habit
 export const updateHabit = habitData => dispatch => {
   axios
-    .patch("/api/habits/update", habitData)
+    .patch("/habits/update", habitData)
     .then(res =>
       dispatch({
         type: UPDATE_HABIT,
@@ -42,7 +42,7 @@ export const updateHabit = habitData => dispatch => {
 // Complete Habit
 export const completeHabit = habitData => dispatch => {
   axios
-    .patch("/api/habits/complete", habitData)
+    .patch("/habits/complete", habitData)
     .then(res =>
       dispatch({
         type: COMPLETE_HABIT,
@@ -55,7 +55,7 @@ export const completeHabit = habitData => dispatch => {
 // Delete habit
 export const deleteHabit = id => dispatch => {
   axios
-    .delete(`/api/habits/delete/${id}`)
+    .delete(`/habits/delete/${id}`)
     .then(res =>
       dispatch({
         type: DELETE_HABIT,
@@ -69,7 +69,7 @@ export const deleteHabit = id => dispatch => {
 export const getHabit = id => dispatch => {
   dispatch(setHabitLoading());
   axios
-    .get(`/api/habits/${id}`)
+    .get(`/habits/${id}`)
     .then(res =>
       dispatch({
         type: GET_HABIT,
@@ -88,7 +88,7 @@ export const getHabit = id => dispatch => {
 export const getHabits = () => dispatch => {
   // dispatch(setHabitsLoading());
   axios
-    .get("/api/habits")
+    .get("/habits")
     .then(res =>
       dispatch({
         type: GET_HABITS,
@@ -107,7 +107,7 @@ export const getHabits = () => dispatch => {
 export const getCompletedHabits = () => dispatch => {
   // dispatch(setHabitsLoading());
   axios
-    .get("/api/habits/completedHabits")
+    .get("/habits/completedHabits")
     .then(res =>
       dispatch({
         type: GET_COMPLETED_HABITS,
