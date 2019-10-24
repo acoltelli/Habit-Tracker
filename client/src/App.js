@@ -9,7 +9,6 @@ import Register from "./components/auth/Register";
 import Login from "./components/auth/Login";
 import PrivateRoute from "./components/private-route/PrivateRoute";
 import Layout from "./components/dashboard/Layout";
-import Calendar from "./components/dashboard/MainContent/Calendar";
 import NotFound from "./components/404/404";
 import "./App.scss";
 

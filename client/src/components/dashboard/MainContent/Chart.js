@@ -17,32 +17,25 @@ static defaultProps = {
     const { habits } = this.props.habits;
     let notComplete = 0;
     for (var i = 0; i < habits.length; i++){
-      if (habits[i].complete === false) {
-        notComplete++
-      }
-    }
-
+      if (habits[i].complete === false) {notComplete++}
+    };
     let d = new Array(habits.length - notComplete).fill(1);
     d.unshift(notComplete);
-
     let chartData = {
       labels:['Not yet complete'],
       datasets:[ { data: d, backgroundColor:['LightGrey'] }]
     };
-
     for (var j = 0; j < habits.length; j++){
       if (habits[j].complete === true) {
         chartData.labels.push(habits[j].name);
       }
-    }
-
     for (var i = 0; i < habits.length; i++){
-      if (habits[i].complete === true) {
-        chartData.datasets[0].backgroundColor.push(habits[i].color);
+    };
+    for (var k = 0; k < habits.length; k++){
+      if (habits[k].complete === true) {
+        chartData.datasets[0].backgroundColor.push(habits[k].color);
       }
     };
-
-    console.log(chartData);
 
     return (
       <div className="chart-wrapper">

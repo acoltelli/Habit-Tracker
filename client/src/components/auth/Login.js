@@ -26,7 +26,6 @@ class Login extends Component {
     if (nextProps.auth.isAuthenticated) {
       this.props.history.push("/");
     }
-
     if (nextProps.errors) {
       this.setState({
         errors: nextProps.errors
@@ -40,12 +39,10 @@ class Login extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
     const userData = {
       email: this.state.email,
       password: this.state.password
     };
-
     this.props.loginUser(userData);
   };
 
@@ -56,7 +53,6 @@ class Login extends Component {
     return (
       <div className="base-wrapper">
         <div className="auth-header">Sign in</div>
-
         <form className="auth-form" noValidate onSubmit={this.onSubmit}>
           <div className="auth-group">
             <label>
