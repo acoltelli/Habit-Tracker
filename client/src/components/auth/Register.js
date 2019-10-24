@@ -3,7 +3,6 @@ import { Link, withRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
-
 import "./Auth.scss";
 
 class Register extends Component {
@@ -38,13 +37,11 @@ class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
-
     const newUser = {
       name: this.state.name,
       email: this.state.email,
       password: this.state.password
     };
-
     this.props.registerUser(newUser, this.props.history);
   };
 
@@ -106,7 +103,7 @@ class Register extends Component {
             </button>
           </div>
           <div className="bottom-group">
-            <Link to="/" className="link">
+            <Link to="/login" className="link">
               Sign in
             </Link>
           </div>
