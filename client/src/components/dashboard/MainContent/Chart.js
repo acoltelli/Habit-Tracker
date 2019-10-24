@@ -29,6 +29,7 @@ static defaultProps = {
       if (habits[j].complete === true) {
         chartData.labels.push(habits[j].name);
       }
+    for (var i = 0; i < habits.length; i++){
     };
     for (var k = 0; k < habits.length; k++){
       if (habits[k].complete === true) {
