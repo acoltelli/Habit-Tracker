@@ -2,6 +2,23 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const Habit = require("../../models/Habit");
+const Validator = require("validator");
+const isEmpty = require("is-empty");
+
+module.exports = function validateNewHabit(data) {
+  let errors = {};
+  // Convert empty fields to an empty string so we can use validator functions
+  data.habitName = !isEmpty(data.habitName) ? data.habitName : "";
+  data.color = !isEmpty(data.color) ? data.color: "";
+  // title checks
+  if (Validator.isEmpty(data.habitName)) {
+    errors.habitName = "Habit title is required";
+  }
+  return {
+    errors,
+    isValid: isEmpty(errors)
+  };
+};
 
 
 // Get habits by user
@@ -54,19 +71,22 @@ router.get(
 router.post(
   "/create",
   passport.authenticate("jwt", { session: false }),
+  const { errors, isValid } = validateNewHabit(req.body);
+  if (!isValid) {
+    console.log("something")
+    return res.status(400).json(errors);
+  }
   async (req, res) => {
     const OWNER = {
       id: req.user.id,
       name: req.user.name,
       email: req.user.email
     };
-
     const NEW_HABIT = await new Habit({
       owner: OWNER,
       name: req.body.habitName,
       color: req.body.color
     });
-
     NEW_HABIT.save().then(habit => res.json(habit));
   }
 );

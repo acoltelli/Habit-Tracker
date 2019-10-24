@@ -2,13 +2,16 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createHabit, updateHabit, deleteHabit } from "../../../../actions/habitsActions";
 import { SliderPicker } from 'react-color';
+import PropTypes from "prop-types";
 import "./Modal.scss";
+
 
 
 class Modal extends Component {
   state = {
     habitName: "",
-    color: ""
+    color: "",
+    errors: {}
   };
 
   componentWillReceiveProps(nextProps) {
@@ -60,6 +63,7 @@ class Modal extends Component {
 
 
   render() {
+    const { errors } = this.state;
     if (!this.props.modal) { return null; }
 
     document.onkeyup = e => {
@@ -103,8 +107,15 @@ class Modal extends Component {
           <h1 className="header">Create New Habit</h1>
           <div className="form-group">
             <label>
+
               <input id="habitName" type="text" placeholder="Habit Name" className="form-input"
-                onChange={this.onChange} value={this.state.habitName}/>
+                onChange={this.onChange} value={this.state.habitName} error={errors.password}/>
+                <div className="auth-error">
+                  {errors.password}
+                  {errors.passwordincorrect}
+                </div>
+
+                
             </label>
           </div>
           <div className="form-label">Color</div>
@@ -119,9 +130,14 @@ class Modal extends Component {
   }
 }
 
+Modal.propTypes = {
+  errors: PropTypes.object.isRequired
+};
+
 const mapStateToProps = state => ({
   auth: state.auth,
-  habits: state.habits
+  habits: state.habits,
+  errors:state.errors
 });
 
 export default connect(
