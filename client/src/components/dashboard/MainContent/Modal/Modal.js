@@ -35,8 +35,7 @@ class Modal extends Component {
       color: this.state.color
     };
     this.props.createHabit(habit);
-    console.log("create")
-
+    this.onclose();
   };
 
   updateHabit = async id => {
@@ -117,13 +116,15 @@ class Modal extends Component {
                 onChange={this.onChange} value={this.state.habitName} error={errors.habitName}/>
                 <div className="auth-error">
                   {errors.habitName}
-                  {errors.color}
                 </div>
 
             </label>
           </div>
           <div className="form-label">Color</div>
           <SliderPicker color={ this.state.color } onChangeComplete={ this.handleChangeColor }/>
+          <div className="auth-error">
+            {errors.color}
+          </div>
           <div>
             <button className="main-btn create-habit" onClick={this.createHabit}>
               Create Habit

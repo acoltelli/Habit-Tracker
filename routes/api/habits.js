@@ -8,11 +8,13 @@ const isEmpty = require("is-empty");
 
 function validateHabitInput(data) {
   let errors = {};
-  // Convert empty fields to an empty string so we can use validator functions
   data.habitName = !isEmpty(data.habitName) ? data.habitName : "";
   data.color = !isEmpty(data.color) ? data.color : "";
-  if (Validator.isEmpty(data.habitName) || data.habitName === "") {
+  if (Validator.isEmpty(data.habitName)) {
     errors.habitName = "Habit name field is required";
+  }
+  if (Validator.isEmpty(data.color)) {
+    errors.color = "Please select a color";
   }
   return {
     errors,
@@ -72,10 +74,8 @@ router.post(
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
     const { errors, isValid } = validateHabitInput(req.body);
-
-    if (req.body.habitName === null) {
-      console.log("feswesd")
-      return res.status(404).json({ emailnotfound: "Email not found" });
+    if (!isValid) {
+      return res.status(400).json(errors);
     }
 
     const OWNER = {
