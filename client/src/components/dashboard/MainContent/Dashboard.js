@@ -71,7 +71,7 @@ completeHabit = id => {
     if (habits.length > 0) {
       content = (
         <>
-          <button className="main-btn" onClick={this.toggleModal}>
+          <button className="main-btn" style={{minWidth: '200px'}} onClick={this.toggleModal}>
             New Habit
           </button>
           <div className="modal-wrapper">

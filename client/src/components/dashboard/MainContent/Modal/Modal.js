@@ -99,12 +99,14 @@ class Modal extends Component {
          <div className="form-label">Color</div>
          <SliderPicker color={ this.state.color } onChangeComplete={ this.handleChangeColor } error={errors.color}/>
           <div>
+          <div class='edit-buttons'>
             <button className="main-btn update-habit" onClick={this.updateHabit.bind(this, this.props.id)}>
               Update Habit
             </button>
             <button className="main-btn delete-habit" onClick={this.deleteHabit.bind(this, this.props.id)}>
               Delete Habit
             </button>
+            </div>
           </div>
         </div>
       );
@@ -131,9 +133,11 @@ class Modal extends Component {
             {errors.color}
           </div>
           <div>
+          <div class='edit-buttons'>
             <button className="main-btn create-habit" onClick={this.createHabit}>
               Create Habit
             </button>
+            </div>
           </div>
         </div>
       );

@@ -8,7 +8,9 @@
 }
 
 .modal {
-  width: 600px;
+  display: flex;
+  flex-direction: column;
+  width: 400px;
   background: white;
   border: 1px solid $gray;
   animation: fade-in 0.25s;
@@ -17,7 +19,7 @@
   visibility: visible;
   position: fixed;
   top: 8%;
-  height: 550px;
+  height: 425px;
   z-index: 1000;
 }
 
@@ -52,11 +54,6 @@
   margin-bottom: 0.75rem;
   font-size: 14px;
   color: $darkGray;
-  font-family: $code;
-}
-
-.created-by {
-  font-size: 15px;
   font-family: $code;
 }
 
@@ -101,42 +98,21 @@
   width: 165px;
 }
 
-.month-due {
-  margin-right: 1rem;
-}
-
-.members {
-  margin-top: 1rem;
-  height: 170px;
-  overflow: scroll;
-  border-bottom: 1px solid $gray;
-}
-
-.members-edit {
-  margin-top: 1rem;
-  overflow: scroll;
-  border-bottom: 1px solid $gray;
-  height: 130px;
-}
-
-.add-members {
-  background-color: $white;
-  color: $primaryBlue;
-
-  &:hover {
-    color: $white;
-  }
+.edit-buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding-top: 15%;
 }
 
 .create-habit,
 .update-habit,
 .delete-habit {
-  position: fixed;
-  bottom: 1.25rem;
+  display: flex;
 }
 
 .delete-habit {
-  margin-left: 335px;
+  display: flex;
   background-color: $red;
   border: 1px solid $red;
 
