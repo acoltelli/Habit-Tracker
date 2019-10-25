@@ -2,7 +2,25 @@ const express = require("express");
 const router = express.Router();
 const passport = require("passport");
 const Habit = require("../../models/Habit");
+const Validator = require("validator");
+const isEmpty = require("is-empty");
 
+
+function validateHabitInput(data) {
+  let errors = {};
+  data.habitName = !isEmpty(data.habitName) ? data.habitName : "";
+  data.color = !isEmpty(data.color) ? data.color : "";
+  if (Validator.isEmpty(data.habitName)) {
+    errors.habitName = "Please enter a habit name";
+  }
+  if (Validator.isEmpty(data.color)) {
+    errors.color = "Please select a color";
+  }
+  return {
+    errors,
+    isValid: isEmpty(errors)
+  };
+};
 
 // Get habits by user
 router.get(
@@ -55,18 +73,20 @@ router.post(
   "/create",
   passport.authenticate("jwt", { session: false }),
   async (req, res) => {
+    const { errors, isValid } = validateHabitInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
     const OWNER = {
       id: req.user.id,
       name: req.user.name,
       email: req.user.email
     };
-
     const NEW_HABIT = await new Habit({
       owner: OWNER,
       name: req.body.habitName,
       color: req.body.color
     });
-
     NEW_HABIT.save().then(habit => res.json(habit));
   }
 );
@@ -76,10 +96,13 @@ router.patch(
   "/update",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    const { errors, isValid } = validateHabitInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
     let habitFields = {};
     habitFields.name = req.body.habitName;
     habitFields.color = req.body.color;
-
     Habit.findOneAndUpdate(
       { _id: req.body.id },
       { $set: habitFields },

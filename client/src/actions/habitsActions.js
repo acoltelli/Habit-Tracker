@@ -1,5 +1,7 @@
 import axios from "axios";
 import {
+  GET_ERRORS,
+  CLEAR_ERRORS,
   CREATE_HABIT,
   UPDATE_HABIT,
   COMPLETE_HABIT,
@@ -22,7 +24,12 @@ export const createHabit = habitData => dispatch => {
         payload: res.data
       })
     )
-    .catch(err => console.log(err));
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
 };
 
 // Update Habit
@@ -35,7 +42,18 @@ export const updateHabit = habitData => dispatch => {
         payload: res.data
       })
     )
-    .catch(err => console.log(err));
+    .catch(err =>
+      dispatch({
+        type: GET_ERRORS,
+        payload: err.response.data
+      })
+    );
+};
+
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
+  };
 };
 
 // Complete Habit

@@ -34,14 +34,14 @@ export default function(state = initialState, action) {
         habits: [action.payload, ...state.habits]
       };
     case COMPLETE_HABIT:
-    let i = state.habits.findIndex(
-      habit => habit._id === action.payload._id
-    );
-    state.habits.splice(i, 1);
-    return {
-      ...state,
-      habits: [action.payload, ...state.habits]
-    };
+      let i = state.habits.findIndex(
+        habit => habit._id === action.payload._id
+      );
+      state.habits.splice(i, 1);
+      return {
+        ...state,
+        habits: [action.payload, ...state.habits]
+      };
     case DELETE_HABIT:
       return {
         ...state,
