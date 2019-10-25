@@ -11,7 +11,7 @@ function validateHabitInput(data) {
   data.habitName = !isEmpty(data.habitName) ? data.habitName : "";
   data.color = !isEmpty(data.color) ? data.color : "";
   if (Validator.isEmpty(data.habitName)) {
-    errors.habitName = "Habit name field is required";
+    errors.habitName = "Please enter a habit name";
   }
   if (Validator.isEmpty(data.color)) {
     errors.color = "Please select a color";
@@ -77,7 +77,6 @@ router.post(
     if (!isValid) {
       return res.status(400).json(errors);
     }
-
     const OWNER = {
       id: req.user.id,
       name: req.user.name,
@@ -97,10 +96,13 @@ router.patch(
   "/update",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
+    const { errors, isValid } = validateHabitInput(req.body);
+    if (!isValid) {
+      return res.status(400).json(errors);
+    }
     let habitFields = {};
     habitFields.name = req.body.habitName;
     habitFields.color = req.body.color;
-
     Habit.findOneAndUpdate(
       { _id: req.body.id },
       { $set: habitFields },

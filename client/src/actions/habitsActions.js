@@ -1,6 +1,7 @@
 import axios from "axios";
 import {
   GET_ERRORS,
+  CLEAR_ERRORS,
   CREATE_HABIT,
   UPDATE_HABIT,
   COMPLETE_HABIT,
@@ -47,6 +48,12 @@ export const updateHabit = habitData => dispatch => {
         payload: err.response.data
       })
     );
+};
+
+export const clearErrors = () => {
+  return {
+    type: CLEAR_ERRORS
+  };
 };
 
 // Complete Habit
