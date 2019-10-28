@@ -30,7 +30,6 @@ router.get(
   }
 );
 
-
 router.get(
   "/:id",
   passport.authenticate("jwt", {
@@ -42,7 +41,6 @@ router.get(
   }
 );
 
-
 router.post(
   "/createDay",
   passport.authenticate("jwt", {
@@ -50,6 +48,7 @@ router.post(
   }),
   async (req, res) => {
     var date = new Date();
+    console.log(date)
     const HABIT = {
       _id: req.body.id,
       title: req.body.name,
@@ -63,12 +62,8 @@ router.post(
       eventData: HABIT,
       user: req.user.id
     });
-
     NEW_DAYENTRY.save().then(day => res.json(day));
   }
 );
-
-
-
 
 module.exports = router;
