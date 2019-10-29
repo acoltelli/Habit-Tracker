@@ -48,8 +48,7 @@ router.post(
   }),
   async (req, res) => {
     var date = new Date();
-    var offset = date.getTimezoneOffset();
-    var localTime = new Date(date.getTime() - (offset * 60000));
+    var localTime = new Date(date.getTime() - (req.body.offset));
     const HABIT = {
       _id: req.body.id,
       title: req.body.name,

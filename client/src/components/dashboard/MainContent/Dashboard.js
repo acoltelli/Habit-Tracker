@@ -30,11 +30,12 @@ toggleEditModal = (name, id, color, e) => {
   });
 };
 
-markComplete = (id, name, color) => {
+markComplete = (id, name, color, offset) => {
   let day = {
     id: id,
     name: name,
-    color: color
+    color: color,
+    offset: offset
   };
   this.props.createDay(day);
   this.completeHabit(id);
@@ -47,16 +48,15 @@ completeHabit = id => {
 
   render() {
     const { habits } = this.props.habits;
-    var date = new Date();
-    var offset = date.getTimezoneOffset()
-    console.log(offset)
     let content;
+    var date = new Date();
+    var offset = date.getTimezoneOffset() * 60000;
     let habitData = habits.map(habit => (
       <div key={habit._id} className="habit-icon" style = {habit.complete ? {backgroundColor: habit.color} : null }>
         <div className="habit-name">{habit.name}</div>
         { !habit.complete ?
         <div>
-        <div className="habit-info-button" onClick={this.markComplete.bind(this, habit._id, habit.name, habit.color)}>
+        <div className="habit-info-button" onClick={this.markComplete.bind(this, habit._id, habit.name, habit.color, offset)}>
           Mark Complete
         </div>
         <div className="habit-info-button" onClick={this.toggleEditModal.bind(this,habit.name,habit._id,habit.color)}>
