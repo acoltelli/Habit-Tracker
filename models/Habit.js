@@ -22,8 +22,7 @@ const HabitSchema = new Schema({
     default: false
   },
   date: {
-    type: Date,
-    default: Date.now
+    type: Date
   },
   color: {
     type: String,

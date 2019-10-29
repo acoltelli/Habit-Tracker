@@ -77,6 +77,7 @@ router.post(
     if (!isValid) {
       return res.status(400).json(errors);
     }
+    var date = new Date();
     const OWNER = {
       id: req.user.id,
       name: req.user.name,
@@ -85,7 +86,8 @@ router.post(
     const NEW_HABIT = await new Habit({
       owner: OWNER,
       name: req.body.habitName,
-      color: req.body.color
+      color: req.body.color,
+      date: new Date(date.getTime() - (req.body.offset))
     });
     NEW_HABIT.save().then(habit => res.json(habit));
   }

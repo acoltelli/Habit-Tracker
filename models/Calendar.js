@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-var date = new Date();
+
 const CalendarSchema = new Schema({
   eventData: {
       type: Object,
@@ -13,8 +13,7 @@ const CalendarSchema = new Schema({
       required: true
     },
     date: {
-      type: Date,
-      default: [date.getFullYear(), date.getMonth() + 1, date.getDate()]
+      type: Date
     }
 
   });

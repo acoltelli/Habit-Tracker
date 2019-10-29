@@ -59,7 +59,8 @@ router.post(
     };
     const NEW_DAYENTRY = await new Calendar({
       eventData: HABIT,
-      user: req.user.id
+      user: req.user.id,
+      date: new Date(date.getTime() - (req.body.offset))
     });
     NEW_DAYENTRY.save().then(day => res.json(day));
   }

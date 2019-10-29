@@ -86,6 +86,7 @@ completeHabit = id => {
               name={this.state.name}
               id={this.state.id}
               color={this.state.color}
+              offset={offset}
             />
           </div>
           <div className="habits-wrapper">{habitData}</div>
@@ -105,7 +106,7 @@ completeHabit = id => {
                 Create your first habit
               </button>
               <div className="modal-wrapper">
-                <Modal onClose={this.toggleModal} modal={this.state.modal} />
+                <Modal onClose={this.toggleModal} modal={this.state.modal} offset={offset}/>
               </div>
             </div>
           </div>

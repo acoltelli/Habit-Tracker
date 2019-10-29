@@ -32,7 +32,8 @@ class Modal extends Component {
   createHabit = () => {
     let habit = {
       habitName: this.state.habitName,
-      color: this.state.color
+      color: this.state.color,
+      offset: this.props.offset
     };
     this.props.createHabit(habit);
     if (this.state.habitName && this.state.color){
