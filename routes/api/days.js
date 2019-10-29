@@ -30,7 +30,6 @@ router.get(
   }
 );
 
-
 router.get(
   "/:id",
   passport.authenticate("jwt", {
@@ -41,7 +40,6 @@ router.get(
     Calendar.findById(id).then(day => res.json(day));
   }
 );
-
 
 router.post(
   "/createDay",
@@ -58,17 +56,12 @@ router.post(
       start: [date.getFullYear(), date.getMonth() + 1, date.getDate()],
       end: [date.getFullYear(), date.getMonth() + 1, date.getDate()]
     };
-
     const NEW_DAYENTRY = await new Calendar({
       eventData: HABIT,
       user: req.user.id
     });
-
     NEW_DAYENTRY.save().then(day => res.json(day));
   }
 );
-
-
-
 
 module.exports = router;
