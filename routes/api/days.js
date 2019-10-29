@@ -48,13 +48,15 @@ router.post(
   }),
   async (req, res) => {
     var date = new Date();
+    var offset = date.getTimezoneOffset();
+    var localTime = new Date( date.getTime());
     const HABIT = {
       _id: req.body.id,
       title: req.body.name,
       backgroundColor: req.body.color,
       allDay: true,
-      start: [date.getFullYear(), date.getMonth() + 1, date.getDate()],
-      end: [date.getFullYear(), date.getMonth() + 1, date.getDate()]
+      start: [localTime.getFullYear(), localTime.getMonth() + 1, localTime.getDate()],
+      end: [localTime.getFullYear(), localTime.getMonth() + 1, localTime.getDate()]
     };
     const NEW_DAYENTRY = await new Calendar({
       eventData: HABIT,
