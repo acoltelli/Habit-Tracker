@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 var date = new Date();
+var offset = date.getTimezoneOffset()
+var localTime = new Date( date.getTime() -  ( offset * 60000 ) );
 const CalendarSchema = new Schema({
   eventData: {
       type: Object,
@@ -14,8 +16,9 @@ const CalendarSchema = new Schema({
     },
     date: {
       type: Date,
-      default: [date.getFullYear(), date.getMonth() + 1, date.getDate()]
+      default: localTime
     }
+
   });
 
 module.exports = Calendar = mongoose.model("calendar", CalendarSchema);
