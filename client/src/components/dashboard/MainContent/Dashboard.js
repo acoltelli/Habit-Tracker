@@ -47,6 +47,9 @@ completeHabit = id => {
 
   render() {
     const { habits } = this.props.habits;
+    var date = new Date();
+    var offset = date.getTimezoneOffset()
+    console.log(offset)
     let content;
     let habitData = habits.map(habit => (
       <div key={habit._id} className="habit-icon" style = {habit.complete ? {backgroundColor: habit.color} : null }>
