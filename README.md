@@ -15,7 +15,6 @@ Create .env file in project, copy/paste the following and set values for the two
 require('dotenv').config()  
 
 DB_URI = '<your_uri>'  
-SECRET = '<your_secret>'
 ```
 cd into project
 ```javascript
